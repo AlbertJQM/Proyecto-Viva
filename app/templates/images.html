@@ -1,0 +1,177 @@
+{% extends './layout.html' %}
+
+{% block title %}Gemeración de imágenes{% endblock %}
+{% block body %}
+
+<div class="sec-title centered">
+    <div class="title">
+        <div class="image-column col-lg-12 col-md-12 col-sm-12">
+            <div class="inner-column">
+                <div class="image wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                    <img src="{{ url_for('static', filename='images/logo-viva-advance-2.png') }}" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>GENERA UNA IMAGEN RELACIONADA AL <i>DIBUJO</i> QUE CAPTURASTE</h2>
+</div>
+<section class="newsletter-section">
+    <div class="inner-container">
+        <div class="row clearfix">
+            <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-column">
+                    <!-- Stream video via webcam -->
+                    <video id="video" autoplay width="640" height="480"></video>
+                </div>
+            </div>
+            
+            {% if data.camara != '' %}
+            <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-column">
+                    <img src="{{ data.camara }}" alt="" />
+                </div>             
+            </div>
+            {% else %}
+            <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-column">
+                    <!-- Webcam video snapshot -->
+                    <canvas id="canvas" width="640" height="480"></canvas>
+                </div>         
+            </div>
+            {% endif %}
+            <!-- Trigger canvas web API --> 
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center form-group">
+                <button class="theme-btn btn-style-six" name="snap" id="snap"><span class="txt">Capturar imagen</span></button>
+            </div>
+        </div>
+        {% if data.imagenActual != '' %}
+        <div class="row clearfix">
+            <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-column">
+                    <div class="sec-title centered">
+                        <div class="title">
+                            ESCANEA EL CÓDIGO QR PARA DESCARGAR TU IMAGEN.
+                        </div>
+                    </div>
+                    <div class="image wow fadeInLeft titlt" data-tilt data-tilt-max="1">
+                        <img src="{{ url_for('static', filename='images/clients/qrimg.png') }}" alt="" />
+                    </div>
+                </div>                
+            </div>
+            <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-column">
+                    <div class="image wow fadeInLeft titlt" data-tilt data-tilt-max="3">
+                        <img src="/static/images/clients/genImages/{{ data.imagenActual }}" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="auto-container">
+        <div class="sec-title">
+        <div class="text"><h3>Describe con breves palabras el estilo que quieres darle a la imagen.</h3></div>
+        <div class="contact-form">
+            <form id="formulario" method="POST" action="/imagesres" enctype="multipart/form-data">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center form-group">
+                        <span class="icon flaticon-user-2"></span>
+                        <textarea name="descripcion" id="descripcion" placeholder="Descripción."></textarea>
+                        <input type="hidden" name="urlImagen" id="urlImagen">
+                    </div>   
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center form-group">
+                    <button class="theme-btn btn-style-two" name="generar" id="generar" type="submit"><span class="txt">Generar</span></button>
+                </div> 
+            </form>
+        </div>
+</section>
+<section class="clients style-two">                
+    <div class="auto-container">            
+        <div class="sponsors-outer">
+            <!--Sponsors Carousel-->
+            <ul class="sponsors-carousel owl-carousel owl-theme">
+                {% if data.cantidad != '' %}
+                    {% if data.cantidad >= 1 %}
+                        <li class="" style="padding-right: 10px;"><figure class="image-box"><a href="#"><img src="/static/images/clients/genImages/{{ data.imagenes[0]}}" alt=""></a></figure></li>
+                    {% endif %}
+                    {% if data.cantidad >= 2 %}
+                        <li class="" style="padding-right: 10px;"><figure class="image-box"><a href="#"><img src="/static/images/clients/genImages/{{ data.imagenes[1]}}" alt=""></a></figure></li>
+                    {% else %}
+                        <li></li>
+                    {% endif %}
+                    {% if data.cantidad >= 3 %}
+                        <li class="" style="padding-right: 10px;"><figure class="image-box"><a href="#"><img src="/static/images/clients/genImages/{{ data.imagenes[2]}}" alt=""></a></figure></li>
+                    {% else %}
+                        <li></li>
+                    {% endif %}
+                    {% if data.cantidad >= 4 %}
+                        <li class="" style="padding-right: 10px;"><figure class="image-box"><a href="#"><img src="/static/images/clients/genImages/{{ data.imagenes[3]}}" alt=""></a></figure></li>
+                    {% else %}
+                        <li></li>
+                    {% endif %}
+                    {% if data.cantidad >= 5 %}
+                        <li class="" style="padding-right: 10px;"><figure class="image-box"><a href="#"><img src="/static/images/clients/genImages/{{ data.imagenes[4]}}" alt=""></a></figure></li>
+                    {% else %}
+                        <li></li>
+                    {% endif %}
+                {% else %}
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</section>
+
+</div>
+<!--End pagewrapper-->
+<script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const snap = document.getElementById("snap");
+    const errorMsgElement = document.querySelector('span#errorMsg');
+
+    const constraints = {
+        audio: false,
+        video: true
+    };
+
+    // Access webcam
+    async function init() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            handleSuccess(stream);
+        } catch (e) {
+            errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+        }
+    }
+
+    // Success
+    function handleSuccess(stream) {
+        window.stream = stream;
+        video.srcObject = stream;
+    }
+
+    // Load init
+    init();
+
+    // Draw image
+    var context = canvas.getContext('2d');
+    snap.addEventListener("click", function() {
+        const texto = document.getElementById('texto')
+        context.drawImage(video, 0, 0, 640, 480);
+    });
+
+    snap.addEventListener("click", function() {
+        const urlImagen = document.getElementById('urlImagen')
+        const img = document.getElementById('canvas');
+        var dato = img.toDataURL("image/png");
+        let enlace = document.createElement('a');		
+        urlImagen.value = dato;
+    });
+</script>
+
+{% endblock %}

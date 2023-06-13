@@ -1,0 +1,133 @@
+{% extends './layout.html' %}
+
+{% block title %}Conversa con la IA{% endblock %}
+{% block body %}
+
+            <!-- Contact Form Section -->
+            <section class="contact-form-section">
+                <div class="auto-container">
+                    <!-- Sec Title -->
+                    <div class="sec-title centered">
+                        <div class="title">
+                            <div class="image-column col-lg-12 col-md-12 col-sm-12">
+                                <div class="inner-column">
+                                    <div class="image wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                        <img src="{{ url_for('static', filename='images/logo-viva-advance-2.png') }}" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>¿CUÁL ES TU DUDA?</h2>
+                        <h2>CONVERSA CON LA INTELIGENCIA ARTIFICIAL</h2>
+                    </div>
+                    <div class="inner-container">
+                        
+                        <!-- Contact Form -->
+                        <div class="contact-form">
+                            <div class="row clearfix">
+                                <div class="col-lg-6 col-md-12 col-sm-12 text-center form-group">
+                                    <button class="theme-btn btn-style-six" id="activar">                                    
+                                        <span class="txt">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+                                                <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
+                                                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                                            </svg>
+                                            Grabar
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 text-center form-group">
+                                    <button class="theme-btn btn-style-six" id="desactivar">    
+                                        <span class="txt">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+                                                <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
+                                                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                                            </svg>
+                                            Detener
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!--Contact Form-->
+                            <form method="POST" action="/voiceres" id="form">
+                                
+                                <div class="row clearfix">
+                                    <div class="col-lg-7 col-md-12 col-sm-12 form-group">
+                                        <span class="icon flaticon-user-2"></span>
+                                        <input type="text" name="nombre" placeholder="Ingresa tu nombre." required>
+                                    </div>
+                                
+                                    <div class="col-lg-6 col-md-12 col-sm-12 form-group">                              
+                                        <textarea name="texto" placeholder="Tu pregunta." id="texto"></textarea>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                        <textarea name="respuesta" placeholder="" id="respuesta" rows="5" style="overflow:auto;" readonly>{{ data.respuesta }}</textarea>
+                                    </div> 
+                                                                    
+                                    <div class="col-lg-6 col-md-12 col-sm-12 text-center form-group">
+                                        <button class="theme-btn btn-style-two" id="consultar" type="submit">    
+                                            <span class="txt">
+                                                Consultar
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 text-center form-group">
+                                        <button id="btnEscuchar" class="theme-btn btn-style-two">
+                                            <span class="txt">
+                                                Escuchar
+                                            </span>
+                                        </button>
+                                    </div>                                     
+                                </div>
+                            </form>
+                            <!--End Contact Form -->
+                        </div>                      
+                    </div>
+                </div>
+            </section>            
+        </div>
+        <!--End pagewrapper-->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const btnEscuchar = document.getElementById("btnEscuchar");
+                const respuestaTextarea = document.getElementById("respuesta");
+                let synth = null;
+                let utterance = null;
+        
+                btnEscuchar.addEventListener("click", function() {
+                    const texto = respuestaTextarea.value;
+        
+                    // Verificar si el navegador es compatible con la API de texto a voz
+                    if ('speechSynthesis' in window) {
+                        if (!synth) {
+                            synth = window.speechSynthesis;
+                            utterance = new SpeechSynthesisUtterance(texto);
+        
+                            // Finalizar la lectura cuando se complete
+                            utterance.addEventListener("end", function() {
+                                btnEscuchar.textContent = "Escuchar";
+                            });
+                        }
+        
+                        // Si ya se está reproduciendo, detener la lectura
+                        if (synth.speaking) {
+                            synth.cancel();
+                            btnEscuchar.textContent = "Escuchar";
+                        } else {
+                            // Iniciar o reiniciar la lectura desde el inicio del texto
+                            synth.speak(utterance);
+                            btnEscuchar.textContent = "Detener";
+                        }
+                    } else {
+                        console.log('El navegador no es compatible con la API de texto a voz.');
+                    }
+                });
+        
+                // Iniciar la lectura automáticamente al cargar la página
+                if (respuestaTextarea.value) {
+                    btnEscuchar.click();
+                }
+            });
+        </script>
+{% endblock %}

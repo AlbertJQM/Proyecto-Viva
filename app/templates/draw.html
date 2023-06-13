@@ -1,0 +1,98 @@
+{% extends './layout.html' %}
+
+{% block title %}Dibujos{% endblock %}
+{% block body %}
+<!-- Newsleter Section -->
+
+<section class="newsletter-section">
+    <div class="" style="padding-left: 30px; padding-right: 30px;">
+        
+        <div class="row clearfix">
+            <!-- Form Column -->
+            <div class="form-column col-lg-4 col-md-4 col-sm-12">
+                <div class="inner-column">
+                    <div class="sec-title centered">
+                        <div class="title">
+                            <div class="image-column">
+                                <div class="inner-column">
+                                    <div class="image wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                        <img src="{{ url_for('static', filename='images/logo-viva-advance-2.png') }}" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>GENERA UNA IMAGEN EN BASE A UN DIBUJO</h2>
+                    </div>
+                    <div class="text">Describe con breves palabras el estilo que quieres darle a tu dibujo.</div>
+                    <div class="contact-form">
+                        <form method="POST" action="/drawres">
+                            <div class="form-group">
+                                <div class="form-group">                              
+                                    <textarea name="descripcion" id="descripcion" placeholder="Descripción." required></textarea>
+                                    <input type="hidden" name="urlDibujo" id="urlDibujo" />
+                                </div>
+                                <button type="submit" id="snap" class="theme-btn btn-style-two"><span class="txt">Generar</span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if data.dibujoActual != '' %}
+            <!--QR-->
+            <div class="image-column col-lg-4 col-md-4 col-sm-12">                
+                <div class="inner-column">
+                    <div class="sec-title centered">
+                        <div class="title">
+                            ESCANEA EL CÓDIGO QR PARA DESCARGAR TU LOGO.
+                        </div>
+                    </div>
+                    <div class="image titlt" data-tilt data-tilt-max="1">
+                        <img src="{{ url_for('static', filename='images/clients/qrDibujo.png') }}" alt="" />
+                    </div>
+                </div>
+            </div>
+            {% endif %}            
+            <div class="form-column col-lg-4 col-md-4 col-sm-12">
+                <div class="inner-column">
+                    <canvas id="pizarra" width="640" height="480" style="display: {{ data.estado }};"></canvas>
+                    {% if data.dibujoActual != '' %}
+                        <div class="image titlt" data-tilt data-tilt-max="3" id="contImg">
+                            <img src="/static/images/clients/draw/{{ data.dibujoActual }}" alt="" width="640" height="480" />
+                        </div>
+                    {% endif %}        
+                </div>
+                <button class="theme-btn btn-style-six" id="limpiar" style="display: {{ data.estadoB }};">                                    
+                    <span class="txt">                        
+                        Limpiar Pizarra
+                    </span>
+                </button>                
+                {% if data.dibujoActual != '' %}
+                <button class="theme-btn btn-style-six" id="mostrar">                                    
+                    <span class="txt">                        
+                        Mostrar Pizarra
+                    </span>
+                </button>
+                <button class="theme-btn btn-style-six" id="ocultar" style="display: none;">                                    
+                    <span class="txt">                        
+                        Ocultar Pizarra
+                    </span>
+                </button>
+                {% endif %}                
+            </div>
+        </div>                
+    </div>    
+</section>
+</div>
+<!--End pagewrapper-->
+<script>
+    const snap = document.getElementById("snap");
+
+    snap.addEventListener("click", function() {
+        const urlDibujo = document.getElementById('urlDibujo')
+        const img = document.getElementById('pizarra');
+        var dato = img.toDataURL("image/png");
+        let enlace = document.createElement('a');		
+        urlDibujo.value = dato;
+    });
+</script>
+{% endblock %}

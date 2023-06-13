@@ -1,0 +1,126 @@
+{% extends './layout.html' %}
+
+{% block title %}Generación de Imágenes{% endblock %}
+{% block body %}
+<div class="sec-title centered">
+    <div class="title">
+        <div class="image-column col-lg-12 col-md-12 col-sm-12">
+            <div class="inner-column">
+                <div class="image wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                    <img src="{{ url_for('static', filename='images/logo-viva-advance-2.png') }}" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>GENERA UNA IMAGEN RELACIONADA A LA <i>FOTO</i> QUE CAPTURASTE</h2>
+</div>
+<section class="newsletter-section">
+    <div class="inner-container">     
+        {% if data.imagenActual != '' %}
+        <div class="row clearfix">
+            <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-column">
+                    <div class="sec-title centered">
+                        <div class="title">
+                            ESCANEA EL CÓDIGO QR PARA DESCARGAR TU IMAGEN.
+                        </div>
+                    </div>
+                    <div class="image wow fadeInLeft titlt" data-tilt data-tilt-max="1">
+                        <img src="{{ url_for('static', filename='images/clients/qrimg.png') }}" alt="" />
+                    </div>
+                </div>                
+            </div>
+            <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-column">
+                    <div class="image wow fadeInLeft titlt" data-tilt data-tilt-max="3">
+                        <img src="/static/images/clients/genImages/{{ data.imagenActual }}" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="auto-container">
+        <div class="sec-title">
+            <div class="contact-form">
+                <form id="formulario" method="POST" action="/askres" enctype="multipart/form-data">
+                    <div class="row clearfix">
+                        <!--  selecionar imagen de la galeria --> 
+                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                            <div class="inner-column">
+                                <input type="file" id="input-file" name="input-file" accept="image/*">
+                            </div>
+                        </div>    
+                        {% if data.imagen != '' %}
+                        <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <img id="img" src="/static/images/clients/generate/{{ data.imagen }}" alt="" />
+                            </div>             
+                        </div>
+                        {% else %}
+                        <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <img src="https://stonegatesl.com/wp-content/uploads/2021/01/avatar-300x300.jpg" id="img" alt="Vista previa." />
+                            </div>             
+                        </div>
+                        {% endif %}                                                        
+                    </div>
+                    <div class="text"><h3>Describe con breves palabras el estilo que quieres darle a la imagen.</h3></div>
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center form-group">
+                            <span class="icon flaticon-user-2"></span>
+                            <textarea name="descripcion" id="descripcion" placeholder="Descripción."></textarea>
+                        </div>   
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center form-group">
+                        <button class="theme-btn btn-style-two" name="generar" id="generar" type="submit"><span class="txt">Generar</span></button>
+                    </div> 
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</div>
+<!--End pagewrapper-->
+
+
+<div class="color-palate">
+<div class="color-trigger">
+    <i class="fa fa-gear"></i>
+</div>
+<div class="color-palate-head">
+    <h6>Choose Your Options</h6>
+</div>
+
+<h5>RTL Version</h5>
+<ul class="rtl-version option-box"> <li class="rtl">RTL Version</li> <li>LTR Version</li> </ul>
+<h5>Boxed Version</h5>
+<ul class="box-version option-box"> <li class="box">Boxed</li> <li>Full width</li></ul>
+<h5>Want Sticky Header</h5>
+<ul class="header-version option-box"> <li class="box">No</li> <li>Yes</li></ul>
+<h5>Dark Verion</h5>
+<ul class="dark-version option-box"> <li class="box">Yes</li> <li>No</li></ul>
+
+<a href="#" class="purchase-btn">Purchase now $17</a>
+
+<div class="palate-foo">
+    <span>You will find much more options and styling in admin panel.</span>
+</div>
+
+</div>
+
+<!-- Search Popup -->
+<div class="search-popup">
+<button class="close-search style-two"><span class="flaticon-multiply"></span></button>
+<button class="close-search"><span class="fa fa-arrow-up"></span></button>
+<form method="post" action="">
+    <div class="form-group">
+        <input type="search" name="search-field" value="" placeholder="Search Here" required="">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </div>
+</form>
+</div>
+
+            {% endblock %}

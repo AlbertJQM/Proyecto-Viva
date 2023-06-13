@@ -1,0 +1,159 @@
+{% extends './layout.html' %}
+
+{% block title %}Proyecto VIVA{% endblock %}
+{% block body %}
+            <!-- Pricing Section -->
+            <section class="pricing style-three">
+                <div class="pattern-layer" style="background-image: url({{ url_for('static', filename='images/background/pattern-1.png') }})"></div>
+                <div class="pattern-layer-two" style="background-image: url{{ url_for('static', filename='images/background/pattern-20.png') }})"></div>
+                <div class="auto-container">
+                    <!-- Sec Title -->
+                    <div class="sec-title centered">
+                        <div class="title">INTELIGENCIA ARTIFICIAL</div>
+                        <h2>PROYECTO VIVA</h2>
+                    </div>
+
+                    <div class="pricing-tabs tabs-box">                      
+                        <!--Tabs Container-->
+                        <div class="tabs-content">   
+                            <!--Tab-->
+                            <div class="tab active-tab" id="prod-monthly">
+                                <div class="content">
+                                    <div class="row clearfix">                                
+                                        <!-- Price Block -->
+                                        <div class="price-block col-lg-3 col-md-6 col-sm-12">                
+                                            <div class="inner-box">
+                                                
+                                                <ul class="price-list">
+                                                    <li>Haz una pregunta</li> 
+                                                    <li></li>
+                                                    <li>Dicta tu pregunta o escribela y la IA te responderá :D</li> 
+                                                </ul>                                                
+                                                <a href="/voice" class="theme-btn btn-style-two"><span class="txt">Empezar</span></a>
+                                                <hr/>
+                                                <hr/>
+                                                <div>
+                                                    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 8 150 50" preserveAspectRatio="none" shape-rendering="auto">
+                                                        <defs>
+                                                            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                                                        </defs>
+                                                        <g class="parallax">
+                                                            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(203,213,42,0.7)" />
+                                                            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(203,213,42,0.5)" />                                                            
+                                                            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(203,213,42,0.3)" />
+                                                            <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(203,213,42)" />                                                            
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Price Block -->
+                                        <div class="price-block col-lg-3 col-md-6 col-sm-12">
+                                            <div class="inner-box">
+                                                  
+                                                <ul class="price-list">
+                                                    <li>Dale estilo o arte de tu dibujo</li>
+                                                    <li></li>
+                                                    <li>Interactua con la pizarra digital, ingresa el estilo que quieres darle y deja que la IA haga todo la magia!!!</li>
+                                                </ul>
+                                                <a href="/draw" class="theme-btn btn-style-two"><span class="txt">Empezar</span></a>
+                                                <hr/>
+                                                <hr/>
+                                                <div>
+                                                    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 8 150 50" preserveAspectRatio="none" shape-rendering="auto">
+                                                        <defs>
+                                                            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                                                        </defs>
+                                                        <g class="parallax">
+                                                            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(203,213,42,0.7)" />
+                                                            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(203,213,42,0.5)" />                                                            
+                                                            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(203,213,42,0.3)" />
+                                                            <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(203,213,42)" />                                                           
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Price Block -->
+                                        <div class="price-block col-lg-3 col-md-6 col-sm-12">
+                                            <div class="inner-box">
+                                                                                               
+                                                <ul class="price-list">
+                                                    <li>Crea tu logo</li>
+                                                    <li></li>
+                                                    <li>Sigue las Instrucciones y crea un logo rápidamente para ti o tu empresa. </li>
+                                                
+                                                </ul>
+                                                <a href="/logo" class="theme-btn btn-style-two"><span class="txt">Empezar</span></a>
+                                                <hr/>
+                                                <hr/>
+                                                <div>
+                                                    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 8 150 50" preserveAspectRatio="none" shape-rendering="auto">
+                                                        <defs>
+                                                            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                                                        </defs>
+                                                        <g class="parallax">
+                                                            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(203,213,42,0.7)" />
+                                                            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(203,213,42,0.5)" />                                                            
+                                                            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(203,213,42,0.3)" />
+                                                            <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(203,213,42)" />                                                           
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Price Block -->
+                                        <div class="price-block col-lg-3 col-md-6 col-sm-12">
+                                            <div class="inner-box">
+                                                                         
+                                                <ul class="price-list">
+                                                    <li>Dale estilo o arte a tu Foto</li>
+                                                    <li>Sube una foto de ti, ingresa el estilo que quieres darle y deja que la IA haga todo la magia!!!</li>
+                                                    
+                                                </ul>                                                
+                                                <a href="/ask" class="theme-btn btn-style-two"><span class="txt">Empezar</span></a>
+                                                <hr/>
+                                                <hr/>
+                                                <div>
+                                                    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 8 150 50" preserveAspectRatio="none" shape-rendering="auto">
+                                                        <defs>
+                                                            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                                                        </defs>
+                                                        <g class="parallax">
+                                                            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(203,213,42,0.7)" />
+                                                            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(203,213,42,0.5)" />                                                            
+                                                            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(203,213,42,0.3)" />
+                                                            <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(203,213,42)" />                                                            
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>            
+                                    </div>
+                                </div>
+                            </div>                      
+                        </div>                      
+                    </div>
+                </div>
+
+            <!-- End Pricing Section -->
+
+            <!-- Waves Container -->
+            <div>
+                <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="parallax">
+                        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                        <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+                    </g>
+                </svg>
+            </div>
+            <!-- Waves End -->         
+{% endblock %}
